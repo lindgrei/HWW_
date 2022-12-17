@@ -1,4 +1,4 @@
-package com.lindgrei.HWW.Commands;
+package com.lindgrei.HWW.Commands.TextCommands;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
@@ -21,5 +21,6 @@ public class PingCommand extends ListenerAdapter {
             channel.sendMessage("Pong!").queue(); // Important to call .queue() on the RestAction returned by sendMessage(...)
         }
     }
+
 }
 

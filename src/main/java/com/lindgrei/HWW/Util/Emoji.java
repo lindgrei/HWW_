@@ -1,4 +1,4 @@
-package HWW.Util;
+package com.lindgrei.HWW.Util;
 
 
 
