@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.lindgrei.HWW.Util.TerminalUtil.logging;
+
 public class PingSlashCommand extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
@@ -19,8 +21,10 @@ public class PingSlashCommand extends ListenerAdapter {
             String user = event.getUser().getAsMention();
             long time = event.getTimeCreated().toInstant().toEpochMilli();
             long ping = TimeUtil.GetTimeDiff(time);
-            event.reply(user + " Your ping is: `" + ping +" ms`" + Emoji.GetRandomMojiBasedOnPing(ping)).queue();
+            long gatewayPing = event.getJDA().getGatewayPing();
+            event.reply(user + " Your ping is: `" + gatewayPing +" ms`" + Emoji.GetRandomMojiBasedOnPing(gatewayPing)).queue();
 
+            logging(event);
         }
     }
 

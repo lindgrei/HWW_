@@ -1,14 +1,9 @@
 package com.lindgrei.HWW.Commands.SlashCommands;
 
-import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
-import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.lindgrei.HWW.Util.TerminalUtil.logging;
 
 public class CommandManager extends ListenerAdapter {
     @Override
@@ -21,6 +16,7 @@ public class CommandManager extends ListenerAdapter {
             event.reply("Welcome To The "+ "***"+event.getGuild().getName()+"***" +" Server, " + mentionnable)
                     .setEphemeral(true).queue();
 
+            logging(event);
         }
     }
 
