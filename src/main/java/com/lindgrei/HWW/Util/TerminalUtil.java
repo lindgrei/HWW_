@@ -3,6 +3,7 @@ package com.lindgrei.HWW.Util;
 import com.diogonunes.jcolor.AnsiFormat;
 import com.diogonunes.jcolor.Attribute;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +33,10 @@ public class TerminalUtil {
     public static void err(Exception e){
         String time = "[" + DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()) + "] ";
         String err = f.format(time) + " " + er.format(e.toString() + " " + e.getMessage()) ;
+    }
+
+    public static void messagelog(MessageReceivedEvent event){
+
     }
 
 

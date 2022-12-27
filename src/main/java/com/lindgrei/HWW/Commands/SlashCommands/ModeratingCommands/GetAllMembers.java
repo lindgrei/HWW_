@@ -12,7 +12,8 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lindgrei.HWW.Database.DatabaseHandler.InsertIntoDatabase;
+import static com.lindgrei.HWW.Database.DatabaseHandler.InsertMember;
+import static com.lindgrei.HWW.Database.DatabaseHandler.checkIfMemberExists;
 import static com.lindgrei.HWW.Util.TerminalUtil.logging;
 
 public class GetAllMembers extends ListenerAdapter {
@@ -21,12 +22,25 @@ public class GetAllMembers extends ListenerAdapter {
         if (event.getName().equals("members")) {
             List<Member> members = event.getGuild().getMembers();
 
+            event.deferReply().setEphemeral(true).queue();
             logging(event);
             for(Member m : members){
-                InsertIntoDatabase(event.getGuild().getName().strip().replace(" ","_").replace("'",""), Long.parseLong(m.getUser().getId()), m.getUser().getAsTag());
+                if(m.getUser().isBot()){
+                    continue;
+                }else {
+                    if (!checkIfMemberExists(m.getIdLong())){
+                        event.getChannel().sendMessage(m.getAsMention() + " Already exists!");
+                    }else{
+                        if (InsertMember(m.getIdLong(), m.getUser().getAsTag())) {
+                            event.getChannel().sendMessage(m.getAsMention() + " -> DB").queue();
+                        } else {
+                            event.getChannel().sendMessage("An error has occured while trying to insert " + m.getAsMention()).queue();
+                        }
+                    }
+                }
             }
 
-            event.getChannel().sendMessage("Done adding all members!").queue();
+            event.getHook().sendMessage("Done adding all members!").queue();
 
 
         }

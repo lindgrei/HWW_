@@ -12,7 +12,6 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lindgrei.HWW.Database.DatabaseHandler.InsertTwitchNameIntoDatabase;
 import static com.lindgrei.HWW.Util.TerminalUtil.logging;
 
 public class SetTwitchSlashCommand extends ListenerAdapter {
@@ -32,13 +31,13 @@ public class SetTwitchSlashCommand extends ListenerAdapter {
                     String[] splitURL = opm.toString().split("/");
                     String TwitchName = splitURL[splitURL.length -1];
 
-                    InsertTwitchNameIntoDatabase(event, name,event.getUser().getIdLong(), TwitchName.replace(")",""));
+                    // InsertTwitchNameIntoDatabase(event, name,event.getUser().getIdLong(), TwitchName.replace(")",""));
                     event.getHook().sendMessage("Your name is: " +TwitchName.replace(")","" + " And has been added to the database!")).setEphemeral(true).queue();
 
 
 
                 }else if(!opm.toString().contains("twitch.tv/") || !opm.toString().contains("https://www.twitch.tv/")){
-                    InsertTwitchNameIntoDatabase(event, name,event.getUser().getIdLong(), opm.getAsString().replace(")",""));
+                    // InsertTwitchNameIntoDatabase(event, name,event.getUser().getIdLong(), opm.getAsString().replace(")",""));
                     logging(event);
                     event.getHook().sendMessage("Your name is: " + opm.getAsString().replace(")","" + " And has been added to the database!")).setEphemeral(true).queue();
                 }
@@ -51,6 +50,7 @@ public class SetTwitchSlashCommand extends ListenerAdapter {
         List<CommandData> commandData = new ArrayList<>();
         OptionData twitchName = new OptionData(OptionType.STRING,"twitch", "A direct link, or straight up your twitch username!", true);
         commandData.add(Commands.slash("linktwt", "Links your twitch name to your Discord TAG").addOptions(twitchName));
+
         event.getGuild().updateCommands().addCommands(commandData).queue();
     }
 }

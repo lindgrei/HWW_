@@ -3,6 +3,7 @@ package com.lindgrei.HWW.Bot;
 import com.lindgrei.HWW.Commands.SlashCommands.*;
 import com.lindgrei.HWW.Commands.SlashCommands.ModeratingCommands.GetAllMembers;
 import com.lindgrei.HWW.EventListeners.JoinListener;
+import com.lindgrei.HWW.EventListeners.MessageListener;
 import com.lindgrei.HWW.Util.Constants;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -28,12 +29,12 @@ public class HWW {
                     .setMemberCachePolicy(MemberCachePolicy.ALL)
                     .setChunkingFilter(ChunkingFilter.ALL)
                     .addEventListeners(new CommandManager(), new JoinListener(), new PingSlashCommand(), new RoleSlashCommand(),new AvatarSlashCommand(),
-                            new GetAllMembers(), new SetTwitchSlashCommand(), new CreateDatabaseSlashCommand())
+                            new GetAllMembers(), new SetTwitchSlashCommand(), new MessageListener())
                     .build().awaitReady();
 
 
 
-            Guild guild = api.getGuildById(979478995483635722L);
+            Guild guild = api.getGuildById(1027275001554030633L);
             if (guild != null){
 //                OptionData twitchName = new OptionData(OptionType.STRING,"twitch_url", "This will let us extract the twitch name from the url", true);
                 OptionData twitchName = new OptionData(OptionType.STRING,"twitch", "A direct link, or straight up your twitch username!", true);
@@ -47,7 +48,6 @@ public class HWW {
 
 
                 guild.updateCommands().addCommands(Commands.slash("linktwt", "Links your twitch name to your Discord TAG").addOptions(twitchName)).queue();
-                guild.updateCommands().addCommands(Commands.slash("createdb","Creates a db for the server").setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR))).queue();
 
 
 
