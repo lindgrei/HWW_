@@ -24,11 +24,11 @@ public final class Emoji {
 
 
     //Arraylists to keep shit tidy.
-    static List<String> NiceMojis = Arrays.asList(new String[]{EZ,PauseCH,POGGERS});
-    static List<String> BadMojis = Arrays.asList(new String[]{KEKW, LULW, OLUL, PepeHands, Sadge});
+    static List<String> NiceMojis = Arrays.asList(EZ,PauseCH,POGGERS);
+    static List<String> BadMojis = Arrays.asList(KEKW, LULW, OLUL, PepeHands, Sadge);
 
     public static String GetRandomMojiBasedOnPing(long ping){
-        String returnMoji = "";
+        String returnMoji;
         Random rand = new Random();
         if(ping < 150){
             returnMoji = NiceMojis.get((rand.nextInt(NiceMojis.size())));
